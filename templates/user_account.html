@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <form method="post" action="{% url 'user_account' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% if form.errors %}
+    {{ form.errors }}
+    {% endif %}
+    <h1 class="lead main_home_header">Change your profile information here!</h1>
+    <table>
+        <tr>
+        <td>{{ form.email|as_crispy_field }}</td>
+      </tr>
+        <tr>
+        <td>{{ form.image|as_crispy_field }}</td>
+      </tr>
+    </table>
+    <button type="submit" class="btn btn-secondary" style="margin-top:1rem;">Submit</button>
+  </form>
+
+{% endblock %}

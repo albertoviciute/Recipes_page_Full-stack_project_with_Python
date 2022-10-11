@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row align-items-center">
+    <h1 class="lead main_home_header">Here you can see all {{ user.username }} recipes!</h1>
+    {% for recipe in recipes %}
+    <div class="col-md-3 d-flex align-items-center">
+        <div class="card mb-3 shadow-sm">
+            {% if recipe.image %}
+            <img src="/media/{{ recipe.image }}" class="card-img-top recipe_image" alt="Recepto nuotrauka" height="300px">
+            {% else %}
+            <img src="{% static '/img/no-image.png' %}" class="card-img-top recipe_image">
+            {% endif %}
+            <div class="card-body">
+                <a href="{% url 'show_recipe' id=recipe.id %}" class="nav-link">
+                <h6 class="card-subtitle mb-2 text-muted">{{ recipe.title }}</h6>
+                </a>
+                <div class="card-body">
+                    <a href="{% url 'edit_recipe' id=recipe.id %}" class="btn text-muted">Edit</a>
+                    <a href="{% url 'delete_recipe' id=recipe.id %}" class="btn text-muted">Delete</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<nav aria-label="...">
+    {% if recipes.has_other_pages %}
+    <ul class="pagination pagination-sm justify-content-end">
+        {% for page_number in recipes.paginator.page_range %}
+        {% if recipes.number == page_number %}
+        <li class="page-item active">
+            <a class="page-link">{{ page_number }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="{% url 'show_user_recipes' page=page_number %}">{{ page_number }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+</nav>
+
+{% endblock %}

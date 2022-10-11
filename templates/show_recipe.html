@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <figure class="figure">
+        <h1 class="lead main_home_header">{{ recipe.title }}</h1>
+        <div class="text-center">
+            <img src="{{ recipe.image.url }}" class="img-fluid" alt="Recipe image">
+            <p>Created by: {{ recipe.user }}</p>
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Ingredients</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row">{{ recipe.ingredients }}</td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <th scope="col">Recipe</th>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td scope="row">{{ recipe.recipe }}</td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <th scope="col">Time</th>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td scope="row">{{ recipe.time }}</td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <th scope="col">Serves</th>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td scope="row">{{ recipe.servings }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </figure>
+</div>
+{% endblock %}

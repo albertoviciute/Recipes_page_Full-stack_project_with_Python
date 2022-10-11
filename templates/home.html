@@ -1,0 +1,29 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container main_container">
+  <div class="row">
+    <div class="col-md-12 text-center" style="padding:1rem;">
+        <h1 class="lead main_home_header">You can find {{ recipes_quantity }} recipes on our page!</h1>
+        <a class="nav-link lead main_home_header text-dark" style="padding-top:0rem;" href="{% url 'show_recipes' %}">Click here and see all recipes!</a>
+    </div>
+    <div class="col-md-6">
+        <img src="{% static '/img/main.jpg' %}" class="img-fluid home_main_img" alt="...">
+    </div>
+    <div class="col-md-6 main_home">
+        <span class="navbar-text">
+                {% if user.is_authenticated %}
+            <h1 class="lead main_home_header">Hello, {{ user.username }}</h1>
+                {% else %}
+                {% endif %}
+        </span>
+        <h1 class="lead main_home_header">What will we eat today?!</h1>
+        <form class="form-inline my-2 my-lg-0 main_home_form" action="{% url 'search' %}" method="get">
+            <input class="form-control mr-sm-2 main_home_input" type="text" placeholder="Enter product or title" name="query">
+        </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

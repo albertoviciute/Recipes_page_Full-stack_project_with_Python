@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  {% if recipes %}
+<div class="row">
+    <h1 class="lead main_home_header">Search results!</h1>
+    {% for recipe in recipes %}
+    <div class="col-md-3 d-flex align-items-stretch recipe_card">
+        <div class="card mb-3 shadow-sm">
+            {% if recipe.image %}
+            <img src="{{ recipe.image.url }}" class="card-img-top recipe_image" alt="...">
+            {% else %}
+            <img src="{% static '/img/no-image.png' %}" class="card-img-top recipe_image">
+            {% endif %}
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">{{ recipe.title }}</h6>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+  {% else %}
+    <h1 class="lead main_home_header">Ups we can not find anything!</h1>
+  {% endif %}
+
+{% endblock %}

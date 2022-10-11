@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row align-items-center">
+    <h1 class="lead main_home_header">Sauces!</h1>
+    <p class="text-justify">
+        In cooking, a sauce is a liquid, cream, or semi-solid food, served on or used in preparing other foods. Most sauces are not normally consumed by themselves; they add flavor, moisture, and visual appeal to a dish.
+    </p>
+    {% if recipes %}
+
+    <div class="col-md-3 d-flex justify-content-center">
+        {% for recipe in recipes %}
+        <div class="card mb-3 shadow-sm"  style="width: 18rem;">
+            {% if recipe.image %}
+            <img src="/media/{{ recipe.image }}" class="card-img-top recipe_image" alt="Recepto nuotrauka" height="300px">
+            {% else %}
+            <img src="{% static '/img/no-image.png' %}" class="card-img-top recipe_image">
+            {% endif %}
+            <div class="card-body">
+                <a href="{% url 'show_recipe' id=recipe.id %}" class="nav-link">
+                <h6 class="card-subtitle mb-2 text-muted">{{ recipe.title }}</h6>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h1 class="lead main_home_header">Ups we do not have any recipes!</h1>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
