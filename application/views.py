@@ -3,9 +3,9 @@ from django.core.paginator import Paginator
 from django.contrib.auth import login
 from django.utils.decorators import method_decorator
 
-from .models import Recipe, Category
+from .models import Recipe, Category, Feedback
 from django.db.models import Q
-from .forms import SignUpForm, EditUserAccountForm, CreateRecipeForm
+from .forms import SignUpForm, EditUserAccountForm, CreateRecipeForm, FeedbackForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -173,3 +173,32 @@ def sauces(request):
 def side_dishes(request):
     search_results = Recipe.objects.filter(category__category='Side dishes').values()
     return render(request, 'side_dishes.html', {'recipes': search_results})
+
+
+@method_decorator(login_required(login_url='login'), name='dispatch')
+class GiveFeedback(LoginRequiredMixin, CreateView):
+    form_c = FeedbackForm
+    context = {}
+    template_name = 'feedback.html'
+
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        self.context['form'] = self.form_c(initial={'user': user})
+        return render(request, self.template_name, self.context)
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_c(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        else:
+            self.context['form'] = form
+            return render(request, self.template_name, self.context)
+
+
+def see_feedback(request):
+    feedback = Feedback.objects.all()
+    context = {
+        'feedback': feedback,
+    }
+    return render(request, 'see_feedback.html', context=context)

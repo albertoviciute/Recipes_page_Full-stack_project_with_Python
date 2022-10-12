@@ -21,4 +21,6 @@ urlpatterns = [
     path('vegetarian', vegetarian, name='vegetarian'),
     path('sauces', sauces, name='sauces'),
     path('side_dishes', side_dishes, name='side_dishes'),
+    path('give_feedback', views.GiveFeedback.as_view(), name='give_feedback'),
+    path('see_feedback', see_feedback, name='see_feedback'),
 ]

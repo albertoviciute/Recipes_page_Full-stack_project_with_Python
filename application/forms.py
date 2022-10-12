@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
-from .models import User, Recipe
+from .models import User, Recipe, Feedback
 from django import forms
 
 
@@ -21,3 +21,10 @@ class CreateRecipeForm(forms.ModelForm):
         fields = '__all__'
         widgets = {'ingredients': forms.Textarea(), 'recipe': forms.Textarea(),
                    'user': forms.HiddenInput()}
+
+
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = '__all__'
+        widgets = {'user': forms.HiddenInput()}

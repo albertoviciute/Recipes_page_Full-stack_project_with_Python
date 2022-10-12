@@ -27,3 +27,9 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Feedback(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
+    topic = models.CharField(max_length=500)
+    feedback = models.TextField(null=True)

@@ -64,6 +64,14 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'create_recipes' %}">Create recipe</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'give_feedback' %}">Give feedback</a>
+        </li>
+        {% endif %}
+        {% if request.user.is_staff %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'see_feedback' %}">Feedbacks</a>
+        </li>
         {% endif %}
       </ul>
         <ul class="navbar-nav ml-auto pull-right">

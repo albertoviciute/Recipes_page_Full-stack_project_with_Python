@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Topic</th>
+        <th scope="col">Feedback</th>
+    </tr>
+    </thead>
+    {% for f in feedback %}
+    <tbody>
+    <tr class="table">
+        <th scope="row">{{ f.user.username }}</th>
+        <td>{{ f.topic }}</td>
+        <td>{{ f.feedback }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
