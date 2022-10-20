@@ -91,10 +91,10 @@ class CreateRecipeView(LoginRequiredMixin, CreateView):
 
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
-class EditRecipe(UpdateView):
+class EditRecipe(CreateRecipeView, UpdateView):
     form_c = CreateRecipeForm
     context = {}
-    template_name = 'create_recipes.html'
+    template_name = 'edit_recipes.html'
 
     def get(self, request, *args, **kwargs):
         id = kwargs.get('id')
@@ -106,7 +106,7 @@ class EditRecipe(UpdateView):
     def post(self, request, *args, **kwargs):
         id = kwargs.get('id')
         recipes = get_object_or_404(Recipe, pk=id)
-        form = self.form_class(instance=recipes, data=request.POST, files=request.FILES)
+        form = self.form_c(instance=recipes, data=request.POST, files=request.FILES)
         if form.is_valid():
             form.save()
             return redirect('show_user_recipes', page=1)

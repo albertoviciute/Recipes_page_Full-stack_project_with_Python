@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% if form.errors %}
+    {{ form.errors }}
+    {% endif %}
+    <h1 class="lead main_home_header">Let's update recipe!</h1>
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-secondary" style="margin-top:1rem;">Submit</button>
+  </form>
+
+{% endblock %}
