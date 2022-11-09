@@ -1,5 +1,6 @@
 # Recipes_page
 Individual project with Django
+<img width="913" alt="image" src="https://user-images.githubusercontent.com/99351981/200850159-30fc78ee-f131-49ca-8118-ca47c458719d.png">
 
 
 # Introduction
